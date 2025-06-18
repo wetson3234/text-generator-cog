@@ -1,25 +1,15 @@
 name: Push to Replicate
 
 on:
-  workflow_dispatch:
-    inputs:
-      model_name:
-        description: 'Le nom du modèle, ex : wetson3234/text-generator-cog'
-        required: true
+  push:
+    branches:
+      - main
 
 jobs:
   push_to_replicate:
-    name: Push to Replicate
     runs-on: ubuntu-latest
-
     steps:
-      - name: Free disk space
-        uses: jlumbroso/free-disk-space@v1.3.1
-        with:
-          tool-cache: false
-          docker-images: false
-
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Cog
@@ -28,4 +18,4 @@ jobs:
           token: ${{ secrets.REPLICATE_CLI_AUTH_TOKEN }}
 
       - name: Push to Replicate
-        run: cog push r8.im/${{ inputs.model_name }}
+        run: cog push wetson3234/text-generator-cog
