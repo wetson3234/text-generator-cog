@@ -1,7 +1,9 @@
 name: Push to Replicate
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   push_to_replicate:
