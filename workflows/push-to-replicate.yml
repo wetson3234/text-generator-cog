@@ -1,11 +1,10 @@
-# trigger run at TIMESTAMP
-
 name: Push to Replicate
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   push_to_replicate:
