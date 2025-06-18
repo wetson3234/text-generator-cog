@@ -3,19 +3,26 @@ name: Push to Replicate
 on:
   push:
     branches:
-      - main
-  workflow_dispatch:
+      - main  # déclenchement automatique sur chaque push vers main
+  workflow_dispatch:  # permet aussi un déclenchement manuel
+    inputs:
+      model_name:
+        description: 'Nom de ton modèle Replicate, ex: wetson3234/text-generator-cog'
+        required: true
+        default: 'wetson3234/text-generator-cog'
 
 jobs:
   push_to_replicate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Vérifier le code
+        uses: actions/checkout@v4
 
-      - name: Setup Cog
+      - name: Préparer l’environnement Cog
         uses: replicate/setup-cog@v2
         with:
           token: ${{ secrets.REPLICATE_CLI_AUTH_TOKEN }}
 
-      - name: Push to Replicate
-        run: cog push r/wetson3234/text-generator-cog
+      - name: Pousser vers Replicate
+        run: |
+          cog push r8.im/${{ inputs.model_name }}
