@@ -19,3 +19,4 @@ jobs:
 
       - name: Push to Replicate
         run: cog push wetson3234/text-generator-cog
+ 
